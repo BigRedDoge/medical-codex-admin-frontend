@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styles from './Homepage.module.css';
 
 const Home = () => {
   const [sourceLanguage, setSourceLanguage] = useState('');
@@ -36,71 +37,83 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Drug Name Fuzzy Matching</h1>
-
-     
-      <form onSubmit={handleFetch}>
-        <div>
-          <label>Source Language:</label>
-          <input
-            type="text"
-            value={sourceLanguage}
-            onChange={(e) => setSourceLanguage(e.target.value)}
-            placeholder="Enter source language"
-            required
-          />
+      {/* Hero Section */}
+      <section className={styles.hero}>
+        <div className={styles.heroText}>
+          <h1>Drug Name Fuzzy Matching</h1>
+          <p>Your one-stop solution for accurate drug name matching.</p>
         </div>
+      </section>
 
-        <div>
-          <label>Query (Drug Name):</label>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Enter drug name"
-            required
-          />
+      {/* Content Section */}
+      <div className={styles.content}>
+        <form onSubmit={handleFetch} className={styles.formContainer}>
+          <div className={styles.formField}>
+            <label className={styles.formLabel}>Source Language:</label>
+            <input
+              type="text"
+              className={styles.formInput}
+              value={sourceLanguage}
+              onChange={(e) => setSourceLanguage(e.target.value)}
+              placeholder="Enter source language"
+              required
+            />
+          </div>
+
+          <div className={styles.formField}>
+            <label className={styles.formLabel}>Query (Drug Name):</label>
+            <input
+              type="text"
+              className={styles.formInput}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Enter drug name"
+              required
+            />
+          </div>
+
+          <div className={styles.formField}>
+            <label className={styles.formLabel}>Threshold:</label>
+            <input
+              type="number"
+              className={styles.formInput}
+              value={threshold}
+              onChange={(e) => setThreshold(e.target.value)}
+              placeholder="Enter threshold"
+            />
+          </div>
+
+          <div className={styles.formField}>
+            <label className={styles.formLabel}>Number of Max Results:</label>
+            <input
+              type="number"
+              className={styles.formInput}
+              value={nbMaxResults}
+              onChange={(e) => setNbMaxResults(e.target.value)}
+              placeholder="Max results"
+            />
+          </div>
+
+          <button type="submit" className={styles.submitButton}>Fetch Matching Drugs</button>
+        </form>
+
+        {/* Results Section */}
+        <div className={styles.results}>
+          <h2>Results:</h2>
+          {results.length > 0 ? (
+            <ul>
+              {results.map((result, index) => (
+                <li key={index}>
+                  <strong>Name:</strong> {result.matching_name} <br />
+                  <strong>Source:</strong> {result.matching_source} <br />
+                  <strong>UID:</strong> {result.matching_uid}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No results yet. Submit a query above.</p>
+          )}
         </div>
-
-        <div>
-          <label>Threshold:</label>
-          <input
-            type="number"
-            value={threshold}
-            onChange={(e) => setThreshold(e.target.value)}
-            placeholder="Enter threshold"
-          />
-        </div>
-
-        <div>
-          <label>Number of Max Results:</label>
-          <input
-            type="number"
-            value={nbMaxResults}
-            onChange={(e) => setNbMaxResults(e.target.value)}
-            placeholder="Max results"
-          />
-        </div>
-
-        <button type="submit">Fetch Matching Drugs</button>
-      </form>
-
-     
-      <div>
-        <h2>Results:</h2>
-        {results.length > 0 ? (
-          <ul>
-            {results.map((result, index) => (
-              <li key={index}>
-                <strong>Name:</strong> {result.matching_name} <br />
-                <strong>Source:</strong> {result.matching_source} <br />
-                <strong>UID:</strong> {result.matching_uid}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No results yet. Submit a query above.</p>
-        )}
       </div>
     </div>
   );
