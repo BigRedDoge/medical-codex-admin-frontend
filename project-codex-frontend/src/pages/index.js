@@ -116,32 +116,38 @@ const Home = () => {
         <div className={`${styles.layoutContainer} p-6 bg-white dark:bg-gray-800 rounded-lg`}>
           {/* Left side inputs */}
           <div className={styles.inputSection}>
-            <Dropdown label={dropdownLabelSource}>
+            <Dropdown label={dropdownLabelSource} data-cy="source-language-dropdown">
               <Dropdown.Header>Select Source Language</Dropdown.Header>
               {languageOptions.map((language) => (
-                <Dropdown.Item key={language} onClick={() => { setSourceLanguage(language); setDropdownLabelSource(language); }}>
+                <Dropdown.Item 
+                  key={language} 
+                  data-cy={`source-language-option-${language}`}
+                  onClick={() => { setSourceLanguage(language); setDropdownLabelSource(language); }}>
                   {language}
                 </Dropdown.Item>
               ))}
             </Dropdown>
 
-            <Dropdown label={dropdownLabelTarget}>
+            <Dropdown label={dropdownLabelTarget} data-cy="target-language-dropdown">
               <Dropdown.Header>Select Target Language</Dropdown.Header>
               {languageOptions.map((language) => (
-                <Dropdown.Item key={language} onClick={() => { setTargetLanguage(language); setDropdownLabelTarget(language); }}>
+                <Dropdown.Item 
+                  key={language} 
+                  data-cy={`target-language-option-${language}`}
+                  onClick={() => { setTargetLanguage(language); setDropdownLabelTarget(language); }}>
                   {language}
                 </Dropdown.Item>
               ))}
             </Dropdown>
 
-            <input type="text" placeholder="Enter drug name" className="w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50" onChange={(e) => setQuery(e.target.value)} />
+            <input type="text" placeholder="Enter drug name" className="w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50"   data-cy="drug-name-input" onChange={(e) => setQuery(e.target.value)} />
             <input type="number" placeholder="Number of Results" className="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50" value={nbMaxResults} onChange={(e) => setNbMaxResults(Number(e.target.value))} />
             <input type="number" placeholder="Threshold" className="w-full p-2 text-gray-900 border border-gray-300 rounded-lg bg-gray-50" value={threshold} onChange={(e) => setThreshold(Number(e.target.value))} />
           </div>
 
           {/* Right side button and results */}
           <div className={styles.resultSection}>
-            <button type="button" className="w-full text-white bg-cyan-700 hover:bg-cyan-800 rounded-lg px-5 py-2.5 mb-4" onClick={handleFuzzyFetch}>
+            <button type="button" className="w-full text-white bg-cyan-700 hover:bg-cyan-800 rounded-lg px-5 py-2.5 mb-4" onClick={handleFuzzyFetch} data-cy="search-button">
               Search for Matching Medications
             </button>
 
@@ -149,7 +155,7 @@ const Home = () => {
               <div className="mt-4">
                 <h2 className="font-bold mb-2">Matching Results:</h2>
                 {results.map((result, index) => (
-                  <button key={index} className="block w-full px-4 py-2 my-1 text-left bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200" onClick={() => handleTranslationFetch(result.matching_name)}>
+                  <button key={index} className="block w-full px-4 py-2 my-1 text-left bg-gray-100 rounded-lg text-gray-700 hover:bg-gray-200" data-cy={`fuzzy-result-${result.matching_name}`} onClick={() => handleTranslationFetch(result.matching_name)}>
                     {result.matching_name}
                   </button>
                 ))}
