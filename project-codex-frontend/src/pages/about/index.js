@@ -13,6 +13,10 @@ const PersonTile = ({ image, name, role }) => {
 
 const About = () => {
   const people = [
+    { image: 'Sean.png', name: 'Sean Clifford', role: 'Intern Developer'},
+    { image: 'Alem.png', name: 'Alem Beskovic', role: 'Intern Developer'},
+    { image: 'Kobby.png', name: 'Kobby Asante-Ansong', role: 'Intern Developer'},
+    { image: 'Farhana.png', name: 'Farhana Yasmin', role: 'Intern Developer'},
     { image: 'Abhishek.jpg', name: 'Abhishek Nair', role: 'Backend Developer, API Developer'},
     { image: 'Sahil.JPG', name: 'Sahil Jambhulkar', role: 'Backend Developer, Test Engineer'},
     { image: 'Shyam.jpg', name: 'Shyam Prasad', role: 'Web Designer, Frontend Developer'},
