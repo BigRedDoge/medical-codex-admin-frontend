@@ -8,6 +8,8 @@
   
   .tile {
     border: 1px solid #ccc;
+    background-color: #f9fafb; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
     text-align: center;
@@ -27,6 +29,11 @@
   
   .title {
     margin: 8px 0;
+    font-size: 1.5rem; /* Increase font size */
+    font-weight: bold; /* Make the text bold */
+    color: #333; /* Set a dark color for the text */
+    text-align: center; /* Center the text */
+    line-height: 1.2; /* Adjust line height for better readability */
   }
   
   .role {
